@@ -5,6 +5,11 @@ from logging.config import fileConfig
 from sqlalchemy import engine_from_config, pool
 from alembic import context
 
+"""
+Alembic environment configuration.
+Handles migration execution in both online and offline modes.
+"""
+
 # Ensure project root is on sys.path for imports like `from app.db import Base`
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
