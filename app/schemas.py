@@ -18,6 +18,10 @@ class LoanOut(BaseModel):
     updated_at: Optional[datetime] = None
 
 class CreateLoanRequest(BaseModel):
+    """
+    Pydantic model for loan creation request.
+    Includes validation for amount, currency, and term.
+    """
     borrower_id: str = Field(min_length=1)
     amount: condecimal(gt=0, le=50000, max_digits=12, decimal_places=2)
     currency: str = Field(min_length=3, max_length=3)

@@ -5,6 +5,10 @@ from sqlalchemy.dialects.postgresql import UUID, TIMESTAMP
 from .db import Base
 
 class Loan(Base):
+    """
+    SQLAlchemy model representing a loan.
+    Includes constraints for amount range and status enum.
+    """
     __tablename__ = "loans"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
