@@ -47,6 +47,12 @@ jobs:
           # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
+      - name: Run migrations
+        env:
+          DATABASE_URL: postgresql+psycopg2://postgres:postgres@localhost:5432/microloans
+        run: |
+          alembic upgrade head
+
       - name: Run tests
         env:
           DATABASE_URL: postgresql+psycopg2://postgres:postgres@localhost:5432/microloans
