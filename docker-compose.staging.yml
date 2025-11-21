@@ -1,0 +1,19 @@
+services:
+  api:
+    restart: on-failure
+    environment:
+      FLASK_ENV: staging
+      FLASK_DEBUG: 0
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 256M
+
+  db:
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
