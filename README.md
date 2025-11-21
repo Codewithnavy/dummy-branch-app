@@ -1,21 +1,38 @@
-# Flask Microloans API + Postgres (Docker)
+curl http://localhost:8000/api/loans
+```
 
-Minimal REST API for microloans, built with Flask, SQLAlchemy, Alembic, and PostgreSQL (via Docker Compose).
+## Configuration
 
-## Quick start
+See `.env.example` for env vars. By default:
+- `DATABASE_URL=postgresql+psycopg2://postgres:postgres@db:5432/microloans`
+- API listens on `localhost:8000`.
 
+## API
+
+- GET `/health` → `{ "status": "ok" }`
+- GET `/api/loans` → list all loans
+- GET `/api/loans/:id` → get loan by id
+- POST `/api/loans` → create loan (status defaults to `pending`)
+
+Example create:
 ```bash
-# 1) Build and start services
-docker compose up -d --build
+curl -X POST http://localhost:8000/api/loans \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "borrower_id": "usr_india_999",
+    "amount": 12000.50,
+    "currency": "INR",
+    "term_months": 6,
+    "interest_rate_apr": 24.0
+  }'
+```
 
-# 2) Run DB migrations
-docker compose exec api alembic upgrade head
+- GET `/api/stats` → aggregate stats: totals, avg, grouped by status/currency.
 
-# 3) Seed dummy data (idempotent)
-docker compose exec api python scripts/seed.py
+## Development
 
-# 4) Hit endpoints
-curl http://localhost:8000/health
+- App entrypoint: `wsgi.py` (`wsgi:app`)
+- Flask app factory: `app/__init__.py`
 curl http://localhost:8000/api/loans
 ```
 
@@ -53,6 +70,30 @@ curl -X POST http://localhost:8000/api/loans \
 - Flask app factory: `app/__init__.py`
 - Models: `app/models.py`
 - Migrations: `alembic/`
+
+## DevOps Setup
+
+### Local Development
+1. **Prerequisites**: Docker and Docker Compose installed.
+2. **Start the application**:
+   ```bash
+   docker-compose up --build
+   ```
+   The API will be available at `http://localhost:8000`.
+   The source code is mounted into the container, so changes will trigger a reload.
+
+### Running Tests
+To run tests locally (requires Python environment):
+```bash
+pip install -r requirements.txt
+pytest
+flake8
+```
+
+### CI/CD Pipeline
+The GitHub Actions pipeline (`.github/workflows/pipeline.yml`) performs the following:
+1. **Test**: Runs `pytest` and `flake8`.
+2. **Build**: Builds the Docker image, scans for vulnerabilities using Trivy, and pushes to Docker Hub (on push to main).
 
 ## Notes
 
