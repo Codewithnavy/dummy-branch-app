@@ -1,5 +1,3 @@
-import pytest
-from app import create_app
 
 
 def test_list_loans_empty(client):
