@@ -8,6 +8,9 @@ bp = Blueprint("stats", __name__)
 
 @bp.route("/stats", methods=["GET"])
 def get_stats():
+    """
+    Get aggregate statistics for all loans.
+    """
     with SessionContext() as session:
         total_count = session.execute(select(func.count(Loan.id))).scalar_one()
         total_amount = session.execute(select(func.coalesce(func.sum(Loan.amount), 0))).scalar_one()

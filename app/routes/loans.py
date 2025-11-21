@@ -11,6 +11,9 @@ bp = Blueprint("loans", __name__)
 
 @bp.route("/loans", methods=["GET"])
 def list_loans():
+    """
+    List all loans, ordered by creation date descending.
+    """
     with SessionContext() as session:
         result = session.execute(select(Loan).order_by(Loan.created_at.desc()))
         loans = [
@@ -21,6 +24,9 @@ def list_loans():
 
 @bp.route("/loans/<id>", methods=["GET"])
 def get_loan(id: str):
+    """
+    Get a specific loan by ID.
+    """
     try:
         loan_id = UUID(id)
     except Exception:
@@ -34,6 +40,9 @@ def get_loan(id: str):
 
 @bp.route("/loans", methods=["POST"])
 def create_loan():
+    """
+    Create a new loan application.
+    """
     payload = request.get_json(silent=True) or {}
     try:
         data = CreateLoanRequest(**payload)
