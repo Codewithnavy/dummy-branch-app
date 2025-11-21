@@ -1,6 +1,10 @@
 import os
 
 class Config:
+    """
+    Configuration class for the application.
+    Reads environment variables or uses default values.
+    """
     FLASK_ENV: str = os.getenv("FLASK_ENV", "development")
     PORT: int = int(os.getenv("PORT", "8000"))
     DATABASE_URL: str = os.getenv(
