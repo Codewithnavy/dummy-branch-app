@@ -17,7 +17,9 @@ def create_app() -> Flask:
 
     # Configure Structured Logging
     logHandler = logging.StreamHandler()
-    formatter = jsonlogger.JsonFormatter('%(asctime)s %(levelname)s %(name)s %(message)s')
+    formatter = jsonlogger.JsonFormatter(
+        '%(asctime)s %(levelname)s %(name)s %(message)s'
+    )
     logHandler.setFormatter(formatter)
     app.logger.addHandler(logHandler)
     app.logger.setLevel(logging.INFO)

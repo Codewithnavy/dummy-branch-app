@@ -11,4 +11,8 @@ def health():
             session.execute(text("SELECT 1"))
         return jsonify({"status": "ok", "database": "connected"})
     except Exception as e:
-        return jsonify({"status": "error", "database": "disconnected", "details": str(e)}), 503
+        return jsonify({
+            "status": "error",
+            "database": "disconnected",
+            "details": str(e)
+        }), 503
