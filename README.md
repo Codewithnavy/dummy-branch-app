@@ -69,7 +69,7 @@ curl -k https://branchloans.com/api/loans
 4. **PostgreSQL** → Returns data to API container
 5. **Response** → API → Nginx → Client (encrypted via HTTPS)
 
-## 🔧 Environment Configuration
+##  Environment Configuration
 
 ### Available Environments
 
@@ -206,7 +206,7 @@ curl -k -X POST https://branchloans.com/api/loans \
 curl -k https://branchloans.com/api/stats
 ```
 
-## 🔄 CI/CD Pipeline
+##  CI/CD Pipeline
 
 ### Pipeline Overview
 
@@ -793,7 +793,7 @@ For comprehensive monitoring documentation, see **[MONITORING.md](MONITORING.md)
 
 **Continue to the next section: [API Documentation](#-api-documentation)**
 
-## 🎯 Future Improvements
+##  Future Improvements
 
 Given more time, I would add:
 
