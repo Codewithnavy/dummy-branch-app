@@ -1,4 +1,7 @@
+import logging
 from flask import Flask
+from pythonjsonlogger import jsonlogger
+from prometheus_flask_exporter import PrometheusMetrics
 
 from .config import Config
 
@@ -11,6 +14,17 @@ def create_app() -> Flask:
     """
     app = Flask(__name__)
     app.config.from_object(Config())
+
+    # Configure Structured Logging
+    logHandler = logging.StreamHandler()
+    formatter = jsonlogger.JsonFormatter('%(asctime)s %(levelname)s %(name)s %(message)s')
+    logHandler.setFormatter(formatter)
+    app.logger.addHandler(logHandler)
+    app.logger.setLevel(logging.INFO)
+
+    # Initialize Prometheus Metrics
+    metrics = PrometheusMetrics(app)
+    metrics.info('app_info', 'Application info', version='1.0.0')
 
     # Lazy imports to avoid circular deps during app init
     from .routes.health import bp as health_bp
