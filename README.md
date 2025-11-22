@@ -2,7 +2,7 @@
 
 A containerized microloans REST API with multi-environment support, CI/CD pipeline, and HTTPS security.
 
-# 📋 Table of Contents
+# Table of Contents
 
 - [Quick Start](#-quick-start)
 - [Architecture](#-architecture)
@@ -13,7 +13,7 @@ A containerized microloans REST API with multi-environment support, CI/CD pipeli
 - [Troubleshooting](#-troubleshooting)
 - [Design Decisions](#-design-decisions)
 
-## 🚀 Quick Start
+## Quick Start
 
 # Prerequisites
 
@@ -25,7 +25,7 @@ A containerized microloans REST API with multi-environment support, CI/CD pipeli
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/navigill7/dummy-branch-app
+git clone https://github.com/Codewithnavy/dummy-branch-app
 cd dummy-branch-app
 
 # 2. Add branchloans.com to your hosts file
@@ -59,7 +59,7 @@ curl -k https://branchloans.com/health
 curl -k https://branchloans.com/api/loans
 ```
 
-## 🏗️ Architecture
+##  Architecture
 
 ### Container Communication Flow
 
@@ -146,7 +146,7 @@ docker compose --env-file .env.prod up -d  # Start prod
 - Higher resource limits for load
 - Exposed on port 80 (behind HTTPS)
 
-## 💻 Local Development
+##  Local Development
 
 ### Development Workflow
 
@@ -288,21 +288,21 @@ Then modify `.github/workflows/ci-cd.yml`:
 
 ### Security Best Practices
 
-✅ **What the pipeline does right:**
+ **What the pipeline does right:**
 - Never exposes credentials in logs
 - Uses GitHub's automatic token for authentication
 - Scans for vulnerabilities before deployment
 - Only pushes images from main branch
 - Uses image attestation for supply chain security
 
-✅ **Additional recommendations:**
+ **Additional recommendations:**
 - Rotate credentials regularly
 - Use environment-specific credentials
 - Enable branch protection on main
 - Require PR reviews before merge
 - Use signed commits
 
-## 📚 API Documentation
+##  API Documentation
 
 ### Endpoints
 
@@ -385,7 +385,7 @@ Get loan statistics.
 }
 ```
 
-## 🔍 Troubleshooting
+##  Troubleshooting
 
 ### Common Issues
 
@@ -507,7 +507,7 @@ docker compose --env-file .env.dev restart api
 docker compose --env-file .env.dev logs -f api
 ```
 
-## 📖 Design Decisions
+##  Design Decisions
 
 ### 1. Multi-Stage Docker Build
 
@@ -602,7 +602,7 @@ docker compose --env-file .env.dev logs -f api
 - **Production:** Data must persist across deployments
 - Easy to switch: DB_VOLUME environment variable
 
-## 📊 Monitoring & Observability
+## Monitoring & Observability
 
 The Branch Loan API includes a comprehensive monitoring stack with structured logging, Prometheus metrics, and Grafana dashboards.
 
@@ -845,7 +845,7 @@ Given more time, I would add:
 - Query performance monitoring
 - Automated backups to S3/GCS
 
-## 🤝 Contributing
+##  Contributing
 
 ```bash
 # 1. Fork and clone
@@ -867,9 +867,3 @@ git push origin feature/amazing-feature
 ## 📝 License
 
 This project is for educational purposes as part of Branch's DevOps Intern assignment.
-
-## 🙏 Acknowledgments
-
-- Branch's DevOps team for the assignment
-- Flask and SQLAlchemy communities
-- Docker and GitHub Actions documentation
